@@ -1,0 +1,76 @@
+---
+title: "Topic About Random Forest"
+author: "Jeremy Hodge"
+date: "2023-12-10"
+categories: [Random Forest, analysis]
+image: "image.jpg"
+---
+
+This is a post with Random Forest Code
+
+OFP_data\<-MP2_data_option2
+
+```{r, echo=TRUE}
+
+library(dplyr)
+library(rpart)
+library(ipred)
+library(caret)
+library(ggplot2)
+library(randomForest)
+library(knitr)
+library(readr)
+
+MP2_data_option2 <- read_csv("C:/Users/hodge/OneDrive/Desktop/2nd Class Using R/MP2_data_option2.csv")
+
+OFP_data<-MP2_data_option2
+
+
+```
+
+Hi,
+
+My name is Jeremy Hodge. I'm a data analyst that has been in the healthcare industry for almost a decade. In my line of work I specialize in Excel, SQL, and data cleansing.
+
+![](images/AuthorJeremyHodge.jpg)
+
+Below is a link to my resume.
+
+https://github.com/JHodge09/Data-Science-Portfolio/blob/main/128_Jeremy_Hodge_Resume.pdf
+
+For the topic of the blog, I would like to discuss Random Forest. This method is valuable due to high accuracy, mitigating over fitting, detecting outliers, and handling missing values. Below, I provided a code utilizing Random Forest.
+
+```{r}
+
+OFP_data$adldiff <- factor(OFP_data$adldiff)
+OFP_data$black <- factor(OFP_data$black)
+OFP_data$sex <- factor(OFP_data$sex)
+OFP_data$maried <- factor(OFP_data$maried)
+OFP_data$employed <- factor(OFP_data$employed)
+OFP_data$privins <- factor(OFP_data$privins)
+OFP_data$medicaid <- factor(OFP_data$medicaid)
+OFP_data$region <- factor(OFP_data$region)
+OFP_data$hlth <- factor(OFP_data$hlth)
+
+# Set seed for reproducibility
+set.seed(5410)
+
+# Split the data into training and testing sets
+index <- sample(1:nrow(OFP_data), nrow(OFP_data)*0.7)
+OFP_train <- OFP_data[index, ]
+OFP_test <- OFP_data[-index, ]
+
+
+print(table(OFP_train$hlth))
+
+# Set seed for reproducibility
+set.seed(22222)
+
+# Train the random forest model with default parameters
+rf_default <- randomForest(hlth ~ ., data = OFP_train)
+
+# Print the summary of the model
+print(rf_default)
+```
+
+In conclusion, Random Forest is useful for being able to create accurate predictions, reducing overfitting, and dealing with missing data, this makes Random Forest a valuable tool in machine learning.
